@@ -26,10 +26,19 @@ function createImgMarkup() {
 function onGalleryClick(event) {
     event.preventDefault(); 
       if (!event.target.classList.contains('gallery__image')) {
-        return
-    };
+        return };
     const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}">`)
+  instance.show()
+ 
+  gallery.addEventListener("keydown", (event => {
+    const ESC_KEY_CODE = 'Escape';
+    const isEscKey = event.code === ESC_KEY_CODE;
+    
+    if (isEscKey) {
+      instance.close();
+    } 
+  }))
+  }
 
-instance.show()
-};
+  
