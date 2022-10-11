@@ -33,15 +33,4 @@ if (!event.target.classList.contains('gallery__image')) {
 const instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`)
 instance.show();  
   
-gallery.removeEventListener("click", onClickClose);
-
-function onClickClose() {
-  instance.close();
-} 
-gallery.addEventListener('keydown', onEscapeClose); 
-
-function onEscapeClose(event) {
-  if (event.key === "Escape") {
-      instance.close();}  
-}
 }
