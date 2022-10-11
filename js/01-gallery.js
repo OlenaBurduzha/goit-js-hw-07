@@ -5,7 +5,6 @@ const gallery = document.querySelector('.gallery');
 const imgMarkup = createImgMarkup();
 
 gallery.insertAdjacentHTML('beforeend', imgMarkup);
-gallery.addEventListener("click", onGalleryClick);
 
 
 function createImgMarkup() {
@@ -23,22 +22,26 @@ function createImgMarkup() {
  }).join('');
 };
 
-function onGalleryClick(event) {
-    event.preventDefault(); 
-      if (!event.target.classList.contains('gallery__image')) {
-        return };
-    const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}">`)
-  instance.show()
- 
-  gallery.addEventListener("keydown", (event => {
-    const ESC_KEY_CODE = 'Escape';
-    const isEscKey = event.code === ESC_KEY_CODE;
-    
-    if (isEscKey) {
-      instance.close();
-    } 
-  }))
-  }
+gallery.addEventListener("click", onGalleryClick);
 
+function onGalleryClick(event) {
+ event.preventDefault(); 
+if (!event.target.classList.contains('gallery__image')) {
+  return
+  };
   
+const instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`)
+instance.show();  
+  
+gallery.removeEventListener("click", onClickClose);
+
+function onClickClose() {
+  instance.close();
+} 
+gallery.addEventListener('keydown', onEscapeClose); 
+
+function onEscapeClose(event) {
+  if (event.key === "Escape") {
+      instance.close();}  
+}
+}

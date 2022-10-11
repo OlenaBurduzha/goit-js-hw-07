@@ -6,13 +6,15 @@ console.log(galleryItems);
 const gallery = document.querySelector('.gallery');
 const imgMarkup = createImgMarkup();
 
+
 gallery.insertAdjacentHTML('beforeend', imgMarkup);
-gallery.addEventListener("click", onGalleryClick);
+// gallery.addEventListener("click", onGalleryClick);
+
 
 
 function createImgMarkup() {
-    return galleryItems.map(({ preview, original, description }) => {
-        return `<div class="gallery__item">
+  return galleryItems.map(({ preview, original, description }) => {
+  return `<div class="gallery__item">
   <a class="gallery__item" href="${original}">
   <img class="gallery__image" 
   src="${preview}" 
@@ -21,14 +23,15 @@ function createImgMarkup() {
 </div>`
  }).join('');
 };
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
 
-function onGalleryClick(event) {
-    event.preventDefault(); 
-      if (!event.target.classList.contains('gallery__image')) {
-        return
-    };
-  const lightbox = new SimpleLightbox('.gallery a', {captionsData:"alt", captionDelay:250});
-};
+// function onGalleryClick(event) {
+//     event.preventDefault(); 
+//       if (!event.target.classList.contains('gallery__image')) {
+//         return
+//     };
+ 
+// };
 
 
 
